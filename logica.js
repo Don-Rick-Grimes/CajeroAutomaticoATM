@@ -14,27 +14,34 @@ var imagenes = {
 };
 var caja = [];
 caja.push(new Billete(100000,3));
-caja.push(new Billete(50000,2));
-caja.push(new Billete(20000,2));
-caja.push(new Billete(10000,2));
-caja.push(new Billete(5000,2));
-caja.push(new Billete(2000,2));
-caja.push(new Billete(1000,2));
+caja.push(new Billete(50000,3));
+caja.push(new Billete(20000,3));
+caja.push(new Billete(10000,3));
+caja.push(new Billete(5000,3));
+caja.push(new Billete(2000,3));
+caja.push(new Billete(1000,3));
 
 
-var dineroCaja = 0;
-parrafo1.innerHTML = 'Contamos con denominaciones de ';
-for(var b of caja)
-{
-  parrafo1.innerHTML+=b.valor+', ';
-  dineroCaja+=b.valor*b.cantidad;
-}
-parrafo1.innerHTML+='<br/> En el cajero hay un total de: '+ dineroCaja +" pesos colombianos.";
+var dineroCaja;
+mostrarSaldo();
 
 
 botonSacarDinero.addEventListener("click",sacarDinero);
 
-
+function mostrarSaldo()
+{
+  dineroCaja = 0;
+  parrafo1.innerHTML = 'En el cajero se encuentran las siguientes denominaciones:<br/> ';
+  for(var b of caja)
+  {
+    dineroCaja+=b.valor*b.cantidad;
+    if(b.cantidad>0)
+    {
+      parrafo1.innerHTML+=b.cantidad+' Billetes de <img src="'+b.srcImage+'">&nbsp';
+    }
+  }
+  parrafo1.innerHTML+='<br/><h2> Saldo cajero: '+ dineroCaja +" pesos.</h2>";
+}
 
 function sacarDinero()
 {
@@ -42,7 +49,7 @@ function sacarDinero()
   this.cantidadDenominacion;
   this.monto = parseInt(numeroMonto.value);
   console.log("Dinero a entregar: " + this.monto);
-  parrafo2.innerHTML='<hr/>';
+  parrafo2.innerHTML+='<hr/>';
   if(this.monto<=dineroCaja)
   {
     for(var denominacion of caja)
@@ -63,7 +70,7 @@ function sacarDinero()
     if(this.monto==0)
     {
       console.log("Transaccion Exitosa");
-      parrafo2.innerHTML += "Transaccion Exitosa, retira tu dinero:<br>";
+      parrafo2.innerHTML += "Transaccion Exitosa, retira tu dinero("+parseInt(numeroMonto.value)+" pesos):<br>";
       for(var e of this.entregado)
       {
         if(e.cantidad>0)
@@ -75,19 +82,20 @@ function sacarDinero()
         }
 
       }
-      /*for(var indiceDenominacion in caja)
+      for(var indiceDenominacion in caja)
       {
-        caja[indiceDenominacion].cantidad-=entregado[indiceDenominacion].cantidad;
-      }*/
+        caja[indiceDenominacion].cantidad-=this.entregado[indiceDenominacion].cantidad;
+      }
     }
     else
     {
       console.log("No se le puede suministrar esa suma de dinero<br/>");
-      parrafo2.innerHTML += "No se le puede suministrar esa suma de dinero con las denominaciones que maneja este cajero.";
+      parrafo2.innerHTML += "No se le puede suministrar esa suma de dinero con las denominaciones que tiene este cajero.";
     }
     console.log("Habia disponible en caja: ",caja);
     console.log("Se entrego: ", this.entregado);
     parrafo2.innerHTML+='<hr/>';
+    mostrarSaldo();
   }
   else
   {
