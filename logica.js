@@ -37,7 +37,7 @@ function mostrarSaldo()
     dineroCaja+=b.valor*b.cantidad;
     if(b.cantidad>0)
     {
-      parrafo1.innerHTML+='<strong>'+b.cantidad+'</strong> x <img src="'+b.srcImage+'">&nbsp';
+      parrafo1.innerHTML+='<strong>'+b.cantidad+'</strong>x<img src="'+b.srcImage+'">&nbsp';
     }
   }
   parrafo1.innerHTML+='<br/><h2> Saldo cajero: '+ dineroCaja +" pesos.</h2>";
