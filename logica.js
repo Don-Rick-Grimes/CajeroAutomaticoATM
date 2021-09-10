@@ -31,13 +31,13 @@ botonSacarDinero.addEventListener("click",sacarDinero);
 function mostrarSaldo()
 {
   dineroCaja = 0;
-  parrafo1.innerHTML = 'En el cajero se encuentran las siguientes denominaciones:<br/> ';
+  parrafo1.innerHTML = 'En el cajero hay:<br/> ';
   for(var b of caja)
   {
     dineroCaja+=b.valor*b.cantidad;
     if(b.cantidad>0)
     {
-      parrafo1.innerHTML+=b.cantidad+' Billetes de <img src="'+b.srcImage+'">&nbsp';
+      parrafo1.innerHTML+='<strong>'+b.cantidad+'</strong> x <img src="'+b.srcImage+'">&nbsp';
     }
   }
   parrafo1.innerHTML+='<br/><h2> Saldo cajero: '+ dineroCaja +" pesos.</h2>";
