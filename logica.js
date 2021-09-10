@@ -70,7 +70,7 @@ function sacarDinero()
         {
           for(var i=1;i<=e.cantidad;i++)
           {
-              parrafo2.innerHTML+='<img src="'+e.srcImage+'">';
+              parrafo2.innerHTML+='<img src="'+e.srcImage+'">&nbsp';
           }
         }
 
